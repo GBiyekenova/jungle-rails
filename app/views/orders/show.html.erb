@@ -11,3 +11,43 @@
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
 </section>
+
+<h1>My Order</h1>
+  </header>
+  <div class="panel panel-default items">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th colspan="2">Product</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>        
+      <%= puts  "=======", @order.line_items.first %>
+        <% @order.line_items.each do |line_item| %>
+          <%= puts  "=======", line_item.product %>
+          <%= render 'line_item', product: line_item.product, quantity: line_item[:quantity].to_i %>         
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="4">
+            Email:
+          </th>
+          <th>
+            <%= @order.email %>
+          </th>
+        </tr><tr>
+          <th colspan="4">
+            TOTAL:
+          </th>
+          <th>
+            <%= humanized_money_with_symbol @order.total_cents / 100.00 %>
+          </th>
+        </tr>
+        
+      </tfoot>
+    </table>
+  </div>
